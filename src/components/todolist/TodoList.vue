@@ -1,9 +1,10 @@
 <template>
   <div class="todolist">
-    <input v-model="addedItem" type="text" v-on:keyup.enter="onAddItem">
-    <button @click="onAddItem">Add Item</button>
+    <input v-model="addedItem" type="text" v-on:keyup.enter="onAddItem"
+           data-testid="todo-input">
+    <button @click="onAddItem" data-testid="todo-add-item-button">Add Item</button>
 
-    <div v-for="item in items">
+    <div v-for="item in dataItems">
       <TodoListItem v-bind:model="item"></TodoListItem>
     </div>
   </div>
@@ -21,17 +22,22 @@ export type Item = {
     TodoListItem,
   },
   props: {
-    msg: String,
     items: Array<{ text: string }>
   },
+  watch: {
+    items(val) {
+      this.dataItems = val;
+    }
+  }
 })
 export default class TodoList extends Vue {
   addedItem = '';
 
-  items: Array<Item> = [];
+  dataItems: Array<Item> = [];
 
   onAddItem(): void {
-    this.items.push({text: this.addedItem});
+    this.dataItems.push({ text: this.addedItem });
+    // console.log(`this.dataItems :`, this.dataItems);
     this.resetAddItem();
   }
 
