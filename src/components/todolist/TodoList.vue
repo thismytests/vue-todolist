@@ -1,11 +1,12 @@
 <template>
-  <input v-model="addedItem" type="text" v-on:keyup.enter="onAddItem">
-  <button @click="onAddItem">Add Item</button>
+  <div class="todolist">
+    <input v-model="addedItem" type="text" v-on:keyup.enter="onAddItem">
+    <button @click="onAddItem">Add Item</button>
 
-  <div v-for="item in items">
-    <TodoListItem v-bind:text="item"></TodoListItem>
+    <div v-for="item in items">
+      <TodoListItem v-bind:text="item"></TodoListItem>
+    </div>
   </div>
-
 </template>
 
 <script lang="ts">
