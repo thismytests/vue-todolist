@@ -1,5 +1,7 @@
 <template>
-  <button @click="onAddItem"></button>
+  <input v-model="addedItem" type="text" v-on:keyup.enter="onAddItem">
+  <button @click="onAddItem">Add Item</button>
+
   <div v-for="item in items">
     <TodoListItem v-bind:text="item"></TodoListItem>
   </div>
@@ -7,8 +9,6 @@
 </template>
 
 <script lang="ts">
-// import {Component, Vue} from 'vue-property-decorator';
-
 import { Options, Vue } from 'vue-class-component';
 import TodoListItem from './TodoListItem.vue';
 
@@ -21,20 +21,18 @@ import TodoListItem from './TodoListItem.vue';
   },
 })
 export default class TodoList extends Vue {
-  addedItem = 'Test';
+  addedItem = '';
 
   items: Array<string> = [];
 
   onAddItem(): void {
-    this.items.push(new Date().toString());
+    this.items.push(this.addedItem);
+    this.resetAddItem();
   }
 
-  // items = []
-
-  // onAddItem() {
-  //   // this.items.push(this.addedItem)
-  //   // this.addedItem = null
-  // }
+  resetAddItem() {
+    this.addedItem = '';
+  }
 }
 
 </script>
