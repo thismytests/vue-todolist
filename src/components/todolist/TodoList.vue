@@ -4,7 +4,7 @@
     <button @click="onAddItem">Add Item</button>
 
     <div v-for="item in items">
-      <TodoListItem v-bind:text="item"></TodoListItem>
+      <TodoListItem v-bind:model="item"></TodoListItem>
     </div>
   </div>
 </template>
@@ -13,6 +13,9 @@
 import { Options, Vue } from 'vue-class-component';
 import TodoListItem from './TodoListItem.vue';
 
+export type Item = {
+  text: string
+}
 @Options({
   components: {
     TodoListItem,
@@ -25,10 +28,10 @@ import TodoListItem from './TodoListItem.vue';
 export default class TodoList extends Vue {
   addedItem = '';
 
-  items: Array<string> = [];
+  items: Array<Item> = [];
 
   onAddItem(): void {
-    this.items.push(this.addedItem);
+    this.items.push({text: this.addedItem});
     this.resetAddItem();
   }
 
