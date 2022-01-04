@@ -10,11 +10,10 @@ import { Options, Vue } from 'vue-class-component';
 
 @Options({
   props: {
-    text: String,
+    model: String,
   },
 })
 export default class TodoListItem extends Vue {
-  // @Prop() private data: string;
 }
 </script>
 

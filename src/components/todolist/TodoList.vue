@@ -19,6 +19,7 @@ import TodoListItem from './TodoListItem.vue';
   },
   props: {
     msg: String,
+    items: Array<{ text: string }>
   },
 })
 export default class TodoList extends Vue {
